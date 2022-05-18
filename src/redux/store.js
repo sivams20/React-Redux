@@ -5,22 +5,21 @@ const initialState = {
 };
 
 function appReducer(prevState = initialState, action){
-    console.log()
+    return{
+        value: valueReducer(prevState.value, action)
+    };
+}
+
+function valueReducer(prevState = 0, action){
     switch(action.type){
         case 'increment':
-            return{
-                ...prevState,
-                value: prevState.value + 1
-            }
+            return prevState + 1
         case 'decrement':
-            return{
-                ...prevState,
-                value: prevState.value - 1
-            }
+            return prevState - 1
         case 'reset':
-            return initialState;
+            return initialState.value;
         default:
-            return initialState;
+            return initialState.value;
     }
 }
 
