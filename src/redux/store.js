@@ -1,16 +1,14 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 const initialState = {
     value: 0    
 };
 
-function appReducer(prevState = initialState, action){
-    return{
-        value: valueReducer(prevState.value, action)
-    };
-}
+const appReducer = combineReducers({
+    value
+});
 
-function valueReducer(prevState = 0, action){
+function value(prevState = 0, action){
     switch(action.type){
         case 'increment':
             return prevState + 1
@@ -23,6 +21,26 @@ function valueReducer(prevState = 0, action){
     }
 }
 
+function increment(){
+    return{
+        type: 'increment'
+    }
+}
+
+function decrement(){
+    return{
+        type: 'decrement'
+    }
+}
+
+function reset(){
+    return{
+        type:'reset'
+    }
+}
+
 const store = createStore(appReducer);
 
 export default store;
+
+export{ increment, decrement, reset };
