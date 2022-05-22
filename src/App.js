@@ -10,8 +10,8 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        {/* <Counter /> */}
-        <Settings/>
+        <Counter />
+        {/* <Settings/> */}
       </div>
     </Provider>
   );

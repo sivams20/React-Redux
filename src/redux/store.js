@@ -1,11 +1,13 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import testMiddleware from './middleware/testMiddleware';
 
 const initialState = {
     value: 0    
 };
 
 const appReducer = combineReducers({
-    value
+    value,
+    dataInfo
 });
 
 function value(prevState = 0, action){
@@ -21,6 +23,34 @@ function value(prevState = 0, action){
     }
 }
 
+function dataInfo(state = {
+    data: [],
+    error: '',
+    loading: false
+}, action){
+    switch(action.type){
+        case 'set-data': 
+            return{
+                ...state,
+                data: action.payload
+            }
+        case 'loading':
+            return{
+                ...state,
+                loading: action.payload 
+            }
+        case 'error':
+            return{
+                ...state,
+                error: action.payload
+            }
+        default:
+            return state;
+
+    }
+}
+
+/* Actions for counter */
 function increment(){
     return{
         type: 'increment'
@@ -39,8 +69,31 @@ function reset(){
     }
 }
 
-const store = createStore(appReducer);
+/* Actions for data info */
+
+function setData(data){
+    return{
+        type: 'set-data',
+        payload: data
+    }
+}
+
+function setLoading(loading){
+    return{
+        type: 'loading',
+        payload: loading
+    }
+}
+
+function setError(error){
+    return{
+        type: 'error',
+        payload: error
+    }
+}
+
+const store = createStore(appReducer, applyMiddleware(testMiddleware));
 
 export default store;
 
-export{ increment, decrement, reset };
+export{ increment, decrement, reset, setData, setLoading, setError };
