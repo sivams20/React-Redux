@@ -14,7 +14,8 @@ function Counter(){
     const loading = useSelector(state => state.dataInfo.loading);
     const error = useSelector(state => state.dataInfo.error);
     useEffect(() => {
-        getDataInfo(dispatch);
+        //getDataInfo(dispatch);
+        dispatch(getDataInfo(dispatch));
       },[])
 
     return(

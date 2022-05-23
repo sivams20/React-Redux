@@ -1,5 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import testMiddleware from './middleware/testMiddleware';
+import thunk from 'redux-thunk';
+// import myThunk from './middleware/myThunk';
+// import testMiddleware from './middleware/testMiddleware';
 
 const initialState = {
     value: 0    
@@ -92,7 +94,7 @@ function setError(error){
     }
 }
 
-const store = createStore(appReducer, applyMiddleware(testMiddleware));
+const store = createStore(appReducer, applyMiddleware(thunk));
 
 export default store;
 
